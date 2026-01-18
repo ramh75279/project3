@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to ddo list</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div>
+        <h3>Student Form</h3>
+        <table id="table1" border="2px">
+            <tr>
+                <td><strong>Name</strong></td>
+                <td><input id="inputbox1" type="text" placeholder="Enter your name"></td>
+            </tr>
+            <tr>
+                <td><strong>Age</strong></td>
+                <td><input id="inputbox2" type="number" placeholder="Enter your Age"></td>
+            </tr>
+            <tr id="inputbox3">
+                <td><strong>Gender</strong></td>
+                <td>
+                    <label><input type="radio"> Male</label>
+                    <label><input type="radio"> Female</label>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Course</strong></td>
+                <td id="inputbox4">
+                    <select id="mydropdown">
+                        <option>java Script</option>
+                        <option>Phyton</option>
+                        <option>java</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Email</strong></td>
+                <td><input id="inputbox5" type="email" placeholder="enter your Email"></td>
+            </tr>
+            <tr>
+                <td class="table-special"  colspan="2"><button id="btn">save</button></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <table border="2">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Course</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+    var saveBtn = document.querySelector("#btn");
+
+    saveBtn.addEventListener("click", function () {
+
+        var name = document.getElementById("inputbox1").value;
+        var age = document.getElementById("inputbox2").value;
+        var email = document.getElementById("inputbox5").value;
+        var course = document.getElementById("mydropdown").value;
+
+        var gender = "";
+        var radios = document.querySelectorAll('input[type="radio"]');
+
+        if (radios[0].checked) {
+            gender = "Male";
+        } else if (radios[1].checked) {
+            gender = "Female";
+        }
+
+        if (!name ||!age|| !email || !gender) {
+            alert("Please fill all details");
+            return;
+        }
+
+        var table = document.querySelectorAll("table")[1];
+
+        var row = table.insertRow();
+
+        row.insertCell(0).innerText = name;
+        row.insertCell(1).innerText = age;
+        row.insertCell(2).innerText = course;
+        row.insertCell(3).innerText = gender;
+        row.insertCell(4).innerText = email;
+
+        var actionCell = row.insertCell(5);
+        var delBtn = document.createElement("button");
+        delBtn.innerText = "Delete";
+
+        delBtn.onclick = function () {
+            row.remove();
+        };
+
+        actionCell.appendChild(delBtn);
+
+        document.getElementById("inputbox1").value = "";
+        document.getElementById("inputbox2").value = "";
+        document.getElementById("inputbox5").value = "";
+        radios[0].checked = false;
+        radios[1].checked = false;
+    });
+</script>
+
+</body>
+
+</html>
